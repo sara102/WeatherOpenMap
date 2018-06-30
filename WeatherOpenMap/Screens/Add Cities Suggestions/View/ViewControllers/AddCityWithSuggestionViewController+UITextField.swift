@@ -16,6 +16,7 @@ extension AddCityWithSuggestionViewController:UITextFieldDelegate
     func textFieldShouldClear(_ textField: UITextField) -> Bool {
         self.suggestions.removeAll()
         self.suggestionsTableView.reloadData()
+        self.suggestionsTableView.isHidden = true
         return true
     }
 }
