@@ -7,15 +7,18 @@
 //
 
 import UIKit
-
+import Reachability
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    var reachability: Reachability?
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        reachability =  initReachability()
+
         return true
     }
 
@@ -44,3 +47,42 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 }
 
+
+//MARK:Reachability
+extension AppDelegate {
+    
+    func initReachability() -> Reachability?
+    {
+        let reachability  = Reachability.forInternetConnection()
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(reachabilityChanged),
+                                               name: Notification.Name.reachabilityChanged,
+                                               object: nil)
+        
+        reachability?.startNotifier()
+        return reachability
+    }
+    
+    
+    @objc func reachabilityChanged(notification: Notification)
+    {
+        
+        if self.reachability?.isReachableViaWiFi() ?? false || self.reachability?.isReachableViaWWAN() ?? false
+        {
+            print("Internet avalaible!!!")
+            NotificationCenter.default.post(Notification(name:Notification.Name.reachable))
+        }
+            
+        else
+        {
+            print("Internet not avalaible!!!")
+            NotificationCenter.default.post(Notification(name:Notification.Name.notReachable))
+        }
+    }
+    
+    
+    func internetReachable()-> Bool {
+        return  self.reachability?.isReachableViaWiFi() ?? false || self.reachability?.isReachableViaWWAN() ?? false
+}
+}

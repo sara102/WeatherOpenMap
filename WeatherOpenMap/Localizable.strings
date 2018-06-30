@@ -1,0 +1,15 @@
+
+/* 
+  Localizable.strings
+  WeatherOpenMap
+
+  Created by Sara AbdulRaheem on 6/29/18.
+  Copyright © 2018 Sara AbdulRaheem. All rights reserved.
+*/
+"forget_to_attach_delegate_error_string" = "did you forget to set the delegate?";
+"internet_is_not_reachable_error_msg" = "no internet access";
+"city_added_successfully_alert_messege" = "City added successfully, check next tab ;)";
+"city_number_of_cities_exceeded_alert_messege" = "Sorry you can only add 5 cities";
+
+"alert_default_ok_button_title" = "Ok";
+
