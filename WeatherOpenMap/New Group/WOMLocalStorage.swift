@@ -11,7 +11,8 @@ import Foundation
 struct WOMLocalStorage {
 
     //MARK:Keys
-   private static let kUserCitiesInLocalStorage = "citiesList"
+   private static let kUserCitiesInLocalStorage = "UserCitiesInLocalStorage"
+   private static let kApplicationFirstLaunch = "ApplicationFirstLaunch"
 
     
     
@@ -42,6 +43,29 @@ struct WOMLocalStorage {
             citiesList = NSKeyedUnarchiver.unarchiveObject(with: decoded) as? [CityDTO] ?? nil
         }
         return citiesList
+    }
+    
+    
+    
+    
+    public static func saveApplicationFirstLaunch(isApplicationFirstLaunch:Bool)
+    {
+        let userDefaults = UserDefaults.standard
+        userDefaults.set(isApplicationFirstLaunch, forKey:kApplicationFirstLaunch )
+        userDefaults.synchronize()
+    }
+    
+    public static func deleteApplicationFirstLaunch()
+    {
+        let userDefaults = UserDefaults.standard
+        userDefaults.removeObject(forKey: kApplicationFirstLaunch)
+        userDefaults.synchronize()
+    }
+    
+    public static func isApplicationFirstLaunch() -> Bool
+    {
+        let userDefaults = UserDefaults.standard
+       return userDefaults.bool(forKey: kApplicationFirstLaunch)
     }
     
 }

@@ -18,7 +18,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         reachability =  initReachability()
-
+      
+        
+        // to keep application state
+        if(WOMLocalStorage.isApplicationFirstLaunch() == false)
+        {
+            WOMLocalStorage.saveApplicationFirstLaunch(isApplicationFirstLaunch: true)
+        }
         return true
     }
 
