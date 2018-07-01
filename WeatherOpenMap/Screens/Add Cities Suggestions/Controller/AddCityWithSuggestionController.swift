@@ -128,6 +128,14 @@ extension AddCityWithSuggestionController:AddCityWithSuggestionHandler {
                 self.currentRequestCity = citiesToRefreshList?.removeFirst()
                 self.fetchWeatherByCityName(cityDescription: self.currentRequestCity!.cityDescription())
             }
+            else
+            {
+                self.addCityWithSuggestionDelegate?.updateUIWithWeatherList(weatherList: [])
+            }
+        }
+        else
+        {
+            self.addCityWithSuggestionDelegate?.updateUIWithWeatherList(weatherList: [])
         }
     }
  
@@ -207,7 +215,21 @@ extension AddCityWithSuggestionController:Connectable {
     }
     
     func requestDidFail(error: WAError, errorResponse: Any, service: String) {
-        self.addCityWithSuggestionDelegate?.notifyWithError(error: error.message)
+          switch service{
+          case WeatherService.className:
+            let userList = WOMLocalStorage.favoriateCitiesList()
+                if userList != nil && userList?.isEmpty == false
+                {
+                   self.addCityWithSuggestionDelegate?.updateUIWithWeatherList(weatherList: userList!)
+                }
+            else
+                {
+                    self.addCityWithSuggestionDelegate?.notifyWithError(error: error.message)
+                }
+          default:
+            self.addCityWithSuggestionDelegate?.notifyWithError(error: error.message)
+            break
+        }
     }
     
     
