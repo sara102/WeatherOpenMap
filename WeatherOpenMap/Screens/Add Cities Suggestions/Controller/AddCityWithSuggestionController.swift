@@ -11,9 +11,10 @@ import Foundation
 //view controller callbacks
 protocol AddCityWithSuggestionDelegate {
     func updateUIWithCitiesList(suggestions:[CityDTO]) -> Void
-    func notifyForCityAddeddSuccessfully()
     func notifyForCitiesExceededSpecifiedLimit()
     func updateUIWithWeatherList(weatherList:[CityDTO]) -> Void
+    func notifyForCityAddeddSuccessfully()
+    func notifyWithError(error:String)
 
 }
 
@@ -28,6 +29,7 @@ protocol AddCityWithSuggestionHandler {
     func saveCityInFavoriateList(city:CityDTO)
     func deleteCityFromFavoriateList(city: CityDTO)
     func fetchFavoriateCitiesWeather()
+    func weatherForUserCurrentCityIfApplicable()
 
 }
 
@@ -50,9 +52,28 @@ final class AddCityWithSuggestionController {
  
 }
 
+//MARK:AddCityWithSuggestionHandler Handler implementation
 
 extension AddCityWithSuggestionController:AddCityWithSuggestionHandler {
    
+    func weatherForUserCurrentCityIfApplicable() {
+        
+        // first launch
+        
+        if (WOMLocalStorage.isApplicationFirstLaunch () == false)
+            {
+                let locationManager = WOMLocationManager.instance()
+                locationManager.locationManagerDelegate = self
+                locationManager.userCurrentLocation()
+                WOMLocalStorage.saveApplicationFirstLaunch(isApplicationFirstLaunch: true)
+
+            }
+
+    }
+    
+    
+    
+    
     func saveCityInFavoriateList(city:CityDTO)
     {
         
@@ -113,6 +134,15 @@ extension AddCityWithSuggestionController:AddCityWithSuggestionHandler {
 }
 
 
+extension AddCityWithSuggestionController:WOMLocationManagerDelegate
+{
+    func updateWithUserCurrentLocation(city: String, country: String) {
+        self.saveCityInFavoriateList(city: CityDTO(cityDescription: "\(city),\(country)"))
+    }
+    
+}
+
+//MARK:Connectable delegate
 extension AddCityWithSuggestionController:Connectable {
     func requestDidSuccess(responseData: Any, service: String) {
         
@@ -154,11 +184,6 @@ extension AddCityWithSuggestionController:Connectable {
                 let  currentRequestIndex = userCitiesList?.index(of: self.currentRequestCity!)
                 userCitiesList?.remove(at:currentRequestIndex!)
             }
-            else
-            {
-                // will enter here in case of new city added
-                addCityWithSuggestionDelegate?.notifyForCityAddeddSuccessfully()
-            }
             userCitiesList?.append(self.currentRequestCity!)
             WOMLocalStorage.saveFavoriateCitiesList(citiesList: userCitiesList!)
             addCityWithSuggestionDelegate?.updateUIWithWeatherList(weatherList: userCitiesList!)
@@ -169,6 +194,10 @@ extension AddCityWithSuggestionController:Connectable {
                 self.currentRequestCity = citiesToRefreshList?.removeFirst()
                 self.fetchWeatherByCityName(cityDescription: self.currentRequestCity!.cityDescription())
             }
+            else
+            {
+                self.addCityWithSuggestionDelegate?.notifyForCityAddeddSuccessfully()
+            }
         default:
             fatalError("Not yet implemented")
             break
@@ -178,7 +207,7 @@ extension AddCityWithSuggestionController:Connectable {
     }
     
     func requestDidFail(error: WAError, errorResponse: Any, service: String) {
-        
+        self.addCityWithSuggestionDelegate?.notifyWithError(error: error.message)
     }
     
     

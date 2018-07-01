@@ -48,6 +48,8 @@
 		56420CDB20E66A770012BD4F /* AddCityWithSuggestionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56420CDA20E66A770012BD4F /* AddCityWithSuggestionController.swift */; };
 		56420CE120E678F00012BD4F /* UIViewController+ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56420CE020E678F00012BD4F /* UIViewController+ActivityIndicator.swift */; };
 		56420CE420E679AB0012BD4F /* WOMActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56420CE320E679AB0012BD4F /* WOMActivityIndicator.swift */; };
+		D57EB16020E843B0000EBFF5 /* WOMLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57EB15F20E843B0000EBFF5 /* WOMLocationManager.swift */; };
+		D57EB16220E84B51000EBFF5 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D57EB16120E84B51000EBFF5 /* CoreLocation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -96,6 +98,8 @@
 		56420CE020E678F00012BD4F /* UIViewController+ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+ActivityIndicator.swift"; sourceTree = "<group>"; };
 		56420CE320E679AB0012BD4F /* WOMActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WOMActivityIndicator.swift; sourceTree = "<group>"; };
 		CF92EA83CABB26AAD699A9B6 /* Pods-WeatherOpenMap.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeatherOpenMap.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WeatherOpenMap/Pods-WeatherOpenMap.debug.xcconfig"; sourceTree = "<group>"; };
+		D57EB15F20E843B0000EBFF5 /* WOMLocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WOMLocationManager.swift; sourceTree = "<group>"; };
+		D57EB16120E84B51000EBFF5 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +107,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D57EB16220E84B51000EBFF5 /* CoreLocation.framework in Frameworks */,
 				237D4314FCE015CE9598DD6A /* Pods_WeatherOpenMap.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -371,6 +376,7 @@
 				56420CE320E679AB0012BD4F /* WOMActivityIndicator.swift */,
 				563B0C5E20E6886F004F0E1E /* WOMLocalStorage.swift */,
 				563B0C6020E68BCB004F0E1E /* WOMAlertView.swift */,
+				D57EB15F20E843B0000EBFF5 /* WOMLocationManager.swift */,
 			);
 			name = Handlers;
 			path = "New Group";
@@ -379,6 +385,7 @@
 		893793E171060C3E63D4BBE5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D57EB16120E84B51000EBFF5 /* CoreLocation.framework */,
 				54700ECF4FCFD2D3D27B2511 /* Pods_WeatherOpenMap.framework */,
 			);
 			name = Frameworks;
@@ -520,6 +527,7 @@
 				56420C7920E633E00012BD4F /* Constants.swift in Sources */,
 				563B0C5920E681B6004F0E1E /* AddCityWithSuggestionViewController+UITableViewDelegate.swift in Sources */,
 				56420CA320E63C400012BD4F /* String+Format.swift in Sources */,
+				D57EB16020E843B0000EBFF5 /* WOMLocationManager.swift in Sources */,
 				563B0C5F20E6886F004F0E1E /* WOMLocalStorage.swift in Sources */,
 				56420CB120E63E430012BD4F /* WeatherPerDayDescription.swift in Sources */,
 				56420C8C20E638470012BD4F /* EndPointConfiguration.swift in Sources */,

@@ -19,12 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         reachability =  initReachability()
       
-        
-        // to keep application state
-        if(WOMLocalStorage.isApplicationFirstLaunch() == false)
-        {
-            WOMLocalStorage.saveApplicationFirstLaunch(isApplicationFirstLaunch: true)
-        }
+  
         return true
     }
 

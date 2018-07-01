@@ -84,7 +84,7 @@ class CityDTO: NSObject, NSCoding {
     override func isEqual(_ object: Any?) -> Bool {
         
         let secondObject = object as! CityDTO
-        if(cityName == secondObject.cityName &&  countryName == secondObject.countryName)
+        if(cityName?.lowercased() == secondObject.cityName?.lowercased() &&  countryName?.lowercased() == secondObject.countryName?.lowercased())
         {
             return true
         }

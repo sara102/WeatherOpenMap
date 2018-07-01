@@ -27,7 +27,9 @@ class AddCityWithSuggestionViewController: UIViewController {
     //MARK:Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setupAddCityWithSuggestionsController()
+        self.addCityWithSuggestionHandler?.weatherForUserCurrentCityIfApplicable()
     }
   
     override func viewWillAppear(_ animated: Bool) {
@@ -47,13 +49,16 @@ class AddCityWithSuggestionViewController: UIViewController {
 
 extension AddCityWithSuggestionViewController: AddCityWithSuggestionDelegate {
  
-    
+    func notifyWithError(error: String) {
+        self.showAlertViewWithDefaultButton(title: "", messege:error)
+
+    }
     func updateUIWithWeatherList(weatherList: [CityDTO]) {
         self.weatherList = weatherList
         self.favoriateCitiesTableView.reloadData()
     }
     func notifyForCityAddeddSuccessfully() {
-        self.showAlertViewWithDefaultButton(title: "", messege:       NSLocalizedString("city_added_successfully_alert_messege", comment: ""))
+        self.suggestionsTableView.isHidden = true
     }
     func notifyForCitiesExceededSpecifiedLimit() {
         self.showAlertViewWithDefaultButton(title: "", messege:       NSLocalizedString("city_number_of_cities_exceeded_alert_messege", comment: ""))

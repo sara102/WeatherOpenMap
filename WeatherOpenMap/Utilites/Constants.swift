@@ -40,6 +40,8 @@ struct Constants {
     public static let kGooglePlacesSearchType = "(cities)"
 
     
-    public static let kCurrentUserLocal = "en_US"
+    public static let kUserDefaultCity = "London"
+    public static let kUserDefaultCountry = "UK"
+
     
 }

@@ -31,7 +31,7 @@ class WeatherService: BaseService {
             }
             else
             {
-                let error = WAError( code: Constants.kInternetIsNotReachableErrorCode, message: NSLocalizedString("internet_is_not_reachable_error_msg", comment: ""))
+                let error = WAError( code: Constants.kInternetIsNotReachableErrorCode, message: NSLocalizedString("error_occured_while_retrive_data", comment: ""))
                 requestDidFail(error: error, errorResponse: [:], tag: requestId)
             }
             
