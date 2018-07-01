@@ -60,6 +60,7 @@ extension AddCityWithSuggestionViewController:UITableViewDelegate,UITableViewDat
         
         if tableView == self.suggestionsTableView
         {
+           self.showActivityIndicator()
            self.addCityWithSuggestionHandler?.saveCityInFavoriateList(city: self.suggestions[indexPath.row])
         }
 
