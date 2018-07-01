@@ -10,5 +10,5 @@ target 'WeatherOpenMap' do
  pod 'Alamofire', '~> 4.7'
  pod 'AlamofireObjectMapper', '~> 5.0'
  pod 'Reachability'
-
+ pod 'ARSLineProgress'
 end

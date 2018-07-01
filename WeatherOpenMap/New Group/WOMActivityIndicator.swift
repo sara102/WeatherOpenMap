@@ -7,30 +7,16 @@
 //
 
 import UIKit
-
+import ARSLineProgress
 class WOMActivityIndicator {
 
-//    fileprivate static var activityIndicatorInstance :WOMActivityIndicator?
-//    fileprivate var  nvactivityIndicatorView:NVActivityIndicatorView?
-//
-//    static func instance()-> WOMActivityIndicator {
-//        if activityIndicatorInstance == nil {
-//            activityIndicatorInstance = WOMActivityIndicator()
-//            activityIndicatorInstance?.nvactivityIndicatorView = NVActivityIndicatorView(frame: UIScreen.main.bounds)
-//        }
-//        return activityIndicatorInstance!
-//    }
-//    private init() {
-//        
-//    }
-//    func showActivityIndicator()
-//    {
-//        self.nvactivityIndicatorView?.startAnimating()
-//    }
-//    func hideActivityIndicator()
-//    {
-//        self.nvactivityIndicatorView?.stopAnimating()
-//
-//    }
-//    
+    class func showActivityIndicator()
+    {
+        ARSLineProgress.show()
+    }
+    class func hideActivityIndicator()
+    {
+        ARSLineProgress.hide()
+
+    }
 }

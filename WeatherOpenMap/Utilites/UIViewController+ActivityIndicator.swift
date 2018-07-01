@@ -12,11 +12,16 @@ import UIKit
 extension UIViewController
 {
     func showActivityIndicator()  {
-//        WOMActivityIndicator.instance().showActivityIndicator()
+        let blockingView = UIView.init(frame: self.view.frame)
+        blockingView.backgroundColor = UIColor.clear
+        blockingView.tag = 10000
+        self.view.addSubview(blockingView)
+        WOMActivityIndicator.showActivityIndicator()
     }
     
     func hideActivityIndicator()  {
-//        WOMActivityIndicator.instance().showActivityIndicator()
+        self.view.viewWithTag(10000)?.removeFromSuperview()
+        WOMActivityIndicator.hideActivityIndicator()
     }
     
     

@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import ARSLineProgress
 
 class AddCityWithSuggestionViewController: UIViewController {
     
@@ -27,13 +27,14 @@ class AddCityWithSuggestionViewController: UIViewController {
     //MARK:Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setupAddCityWithSuggestionsController()
+        self.showActivityIndicator()
         self.addCityWithSuggestionHandler?.weatherForUserCurrentCityIfApplicable()
     }
   
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+         self.showActivityIndicator()
          self.addCityWithSuggestionHandler?.fetchFavoriateCitiesWeather()
     }
 
@@ -44,35 +45,55 @@ class AddCityWithSuggestionViewController: UIViewController {
         
     }
     
+    
+    func showSuggestionsView()
+    {
+        UIView.animate(withDuration: 0.3) {
+            self.suggestionsTableView.isHidden = false
+
+        }
+    }
+    func hideSuggestionsView()
+    {
+        UIView.animate(withDuration: 0.3) {
+            self.suggestionsTableView.isHidden = true
+            
+        }
+    }
 }
 
 
 extension AddCityWithSuggestionViewController: AddCityWithSuggestionDelegate {
  
     func notifyWithError(error: String) {
+        self.hideActivityIndicator()
         self.showAlertViewWithDefaultButton(title: "", messege:error)
 
     }
     func updateUIWithWeatherList(weatherList: [CityDTO]) {
+        self.hideActivityIndicator()
         self.weatherList = weatherList
         self.favoriateCitiesTableView.reloadData()
     }
     func notifyForCityAddeddSuccessfully() {
-        self.suggestionsTableView.isHidden = true
+        self.hideActivityIndicator()
+        self.hideSuggestionsView()
     }
     func notifyForCitiesExceededSpecifiedLimit() {
+        self.hideActivityIndicator()
         self.showAlertViewWithDefaultButton(title: "", messege:       NSLocalizedString("city_number_of_cities_exceeded_alert_messege", comment: ""))
     }
 
     func updateUIWithCitiesList(suggestions: [CityDTO]) -> Void {
+        self.hideActivityIndicator()
         self.suggestions = suggestions
         if (self.suggestions.isEmpty == true)
         {
-            self.suggestionsTableView.isHidden = true
+            self.hideSuggestionsView()
         }
         else
         {
-            self.suggestionsTableView.isHidden = false
+            self.showSuggestionsView()
         }
 
         self.suggestionsTableView.reloadData()
